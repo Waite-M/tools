@@ -1,0 +1,12 @@
+{
+  "main": "index.html",
+  "logo": "logo.png",
+  "preload": "./preload.js",
+  "features": [
+    {
+      "code": "sql",
+      "explain": "hello world",
+      "cmds":["sql", "mysql"]
+    }
+  ]
+}

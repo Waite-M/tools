@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<head>
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" type="text/css"></link>
+</head>
+
+<html>
+<body>
+<div class="container m-5" style="width:500px;">
+    <textarea class="form form-control border border-black border-2" id="ipt" rows="8"></textarea>
+    <div class="px-2 my-3">
+        <span class="alert-info text-info"></span>
+        <span class="float-end">
+            <button class="btn btn-sm btn-primary" id="id">sqlIn</button>
+            <button class="btn btn-sm btn-primary" id="path">linux路径</button>
+        </span>
+    </div>
+</div>
+
+</body>
+
+<script>
+    // sql格式化
+    $('#id').click(() => {
+        let val = $('#ipt').val()
+        let arr = val.split("\n")
+        let str = ""
+        let length = arr.length
+        arr.forEach((val, index) => {
+            if (!val) return true
+            if (index == length - 1) {
+                str = str + "'" + val + "'"
+            } else {
+                str = str + "'" + val + "',"
+            }
+
+        })
+        copy_str('#ipt',str)
+        $('.alert-info').text('复制成功')
+    })
+    // 转linux 路径
+    $('#path').click(() => {
+        let val = $('#ipt').val()
+        console.log(val)
+        let str = val.replace(/\//g,"\\");
+        copy_str('#ipt',str)
+        $('.alert-info').text('转换成功')
+    })
+    // 结果复制
+    var copy_str = (ele,str) => {
+        $(ele).val(str).select()
+        document.execCommand('copy');
+        $(ele).blur()
+    }
+</script>
+</html>
